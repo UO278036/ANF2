@@ -1,0 +1,2735 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ANF TRAINER · Culturismo natural con Arturo</title>
+  <meta name="description" content="Coaching de culturismo natural con Arturo (ANFtrainer). Sin sustancias dopantes. Plazas limitadas." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* ========================================================
+       ANF TRAINER — Navy Seal · solo contenido verificado
+       ======================================================== */
+
+    :root {
+      --navy-900: #050d1a;
+      --navy-800: #0a1628;
+      --navy-700: #0f1f38;
+      --navy-600: #16294a;
+      --navy-500: #1f3a66;
+      --line: rgba(244, 241, 234, 0.08);
+      --line-strong: rgba(244, 241, 234, 0.18);
+      --ink: #f4f1ea;
+      --ink-dim: rgba(244, 241, 234, 0.62);
+      --ink-faint: rgba(244, 241, 234, 0.38);
+      --gold: #d4a84a;
+      --gold-bright: #f1c862;
+      --magenta: #ff2bd4;
+      --accent: var(--gold);
+      --bezel: 1px solid var(--line);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--navy-900);
+      color: var(--ink);
+      font-family: "Inter", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Custom cursor — desktop with fine pointer only */
+    @media (hover: hover) and (pointer: fine) {
+      body.has-custom-cursor,
+      body.has-custom-cursor * { cursor: none !important; }
+    }
+
+    .display {
+      font-family: "Anton", "Bebas Neue", Impact, sans-serif;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      line-height: 0.88;
+      text-transform: uppercase;
+    }
+    .mono {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      letter-spacing: 0.02em;
+    }
+
+    /* ===== Cursor ===== */
+    .cursor-root {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+    }
+    .cursor-dot {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      mix-blend-mode: difference;
+      transform: translate(-50%, -50%);
+      transition: width 0.18s ease, height 0.18s ease, opacity 0.2s;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
+      top: 0;
+      left: 0;
+    }
+    .cursor-dot.is-hover {
+      width: 38px;
+      height: 38px;
+      background: transparent;
+      border: 1.5px solid var(--accent);
+      mix-blend-mode: normal;
+    }
+    .cursor-dot.is-orbit { opacity: 0; }
+
+    .cursor-orbit {
+      position: absolute;
+      width: 160px;
+      height: 160px;
+      transform: translate(-50%, -50%) scale(0.6);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.25s ease, transform 0.35s cubic-bezier(.34, 1.56, .64, 1);
+      top: 0;
+      left: 0;
+    }
+    .cursor-orbit.is-active {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    .cursor-orbit svg {
+      width: 100%;
+      height: 100%;
+      animation: orbit-spin 9s linear infinite;
+    }
+    .cursor-orbit text {
+      fill: var(--accent);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .cursor-orbit-inner {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+    }
+    .cursor-orbit-inner .arrow-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: grid;
+      place-items: center;
+      color: var(--navy-900);
+      font-size: 14px;
+      box-shadow: 0 0 24px rgba(212, 168, 74, 0.4);
+      transform: scale(0);
+      transition: transform 0.3s cubic-bezier(.34, 1.56, .64, 1) 0.05s;
+    }
+    .cursor-orbit.is-active .arrow-circle { transform: scale(1); }
+    @keyframes orbit-spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* ===== Top nav ===== */
+    .top-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 32px;
+      background: linear-gradient(to bottom, rgba(5, 13, 26, 0.92), rgba(5, 13, 26, 0));
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      background: var(--ink);
+      color: var(--navy-900);
+      display: grid;
+      place-items: center;
+      font-family: "Anton", sans-serif;
+      font-size: 22px;
+      letter-spacing: -0.02em;
+      clip-path: polygon(0 0, 100% 0, 100% 88%, 88% 100%, 0 100%);
+    }
+    .brand-text { display: flex; flex-direction: column; line-height: 1; gap: 3px; }
+    .brand-text .name {
+      font-family: "Anton", sans-serif;
+      font-size: 18px;
+      letter-spacing: 0.04em;
+    }
+    .brand-text .sub {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      color: var(--ink-dim);
+      text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      background: rgba(15, 31, 56, 0.5);
+      border: var(--bezel);
+      border-radius: 999px;
+      padding: 4px;
+    }
+    .nav-link {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+      padding: 9px 16px;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .nav-link:hover { color: var(--ink); background: rgba(244, 241, 234, 0.06); }
+    .nav-link.is-active { color: var(--navy-900); background: var(--accent); }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink);
+      padding: 11px 18px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      text-decoration: none;
+      transition: all 0.2s;
+      background: transparent;
+    }
+    .nav-cta:hover { background: var(--ink); color: var(--navy-900); }
+    .nav-cta .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #38d171;
+      box-shadow: 0 0 8px #38d171;
+    }
+
+    /* ===== Hero ===== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      padding: 140px 32px 80px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(244, 241, 234, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(244, 241, 234, 0.03) 1px, transparent 1px);
+      background-size: 80px 80px;
+      pointer-events: none;
+      mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+    }
+    .hero-glow {
+      position: absolute;
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212, 168, 74, 0.18), transparent 60%);
+      top: 20%; right: -200px;
+      pointer-events: none;
+      filter: blur(20px);
+    }
+    .hero-glow-2 {
+      position: absolute;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 43, 212, 0.12), transparent 60%);
+      bottom: -100px; left: -100px;
+      pointer-events: none;
+      filter: blur(40px);
+    }
+
+    .hero-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+      margin-bottom: 48px;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-meta-l, .hero-meta-r { display: flex; gap: 18px; align-items: center; }
+    .hero-meta-l .dash { width: 24px; height: 1px; background: var(--ink-dim); }
+    .hero-meta-r .live { display: flex; align-items: center; gap: 6px; }
+    .hero-meta-r .live span {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #ef4444;
+      animation: pulse 1.4s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .hero-main {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 64px;
+      align-items: end;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-title { font-size: clamp(76px, 12vw, 200px); margin: 0; }
+    .hero-title .l1 { display: block; }
+    .hero-title .l2 {
+      display: block;
+      color: transparent;
+      -webkit-text-stroke: 1.5px var(--ink);
+    }
+    .hero-title .l2 .accent-word {
+      color: var(--accent);
+      -webkit-text-stroke: 0;
+      font-style: italic;
+    }
+    .hero-title .l3 { display: block; }
+
+    .hero-side {
+      padding-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .hero-side-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding: 6px 12px;
+      border: 1px solid var(--accent);
+      align-self: flex-start;
+      border-radius: 999px;
+    }
+    .hero-side-tag::before {
+      content: "";
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+    .hero-side-text {
+      font-size: 17px;
+      line-height: 1.5;
+      color: var(--ink-dim);
+      max-width: 420px;
+      margin: 0;
+    }
+    .hero-side-text strong { color: var(--ink); font-weight: 500; }
+
+    .hero-cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 600;
+      background: var(--accent);
+      color: var(--navy-900);
+      padding: 16px 24px;
+      border: none;
+      text-decoration: none;
+      transition: all 0.2s;
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+    }
+    .btn-primary:hover {
+      background: var(--gold-bright);
+      transform: translate(-2px, -2px);
+      box-shadow: 4px 4px 0 var(--magenta);
+    }
+    .btn-primary .arrow {
+      width: 18px; height: 1px;
+      background: var(--navy-900);
+      position: relative;
+    }
+    .btn-primary .arrow::after {
+      content: "";
+      position: absolute;
+      right: 0; top: -3px;
+      width: 7px; height: 7px;
+      border-top: 1px solid var(--navy-900);
+      border-right: 1px solid var(--navy-900);
+      transform: rotate(45deg);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 500;
+      background: transparent;
+      color: var(--ink);
+      padding: 16px 24px;
+      border: 1px solid var(--line-strong);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--ink); background: rgba(244, 241, 234, 0.04); }
+
+    /* ===== Marquee ===== */
+    .marquee {
+      background: var(--ink);
+      color: var(--navy-900);
+      overflow: hidden;
+      padding: 18px 0;
+      transform: rotate(-1.5deg);
+      margin: -20px -40px 0;
+      border-top: 1px solid var(--navy-900);
+      border-bottom: 1px solid var(--navy-900);
+    }
+    .marquee-track {
+      display: flex;
+      gap: 32px;
+      white-space: nowrap;
+      animation: marquee 30s linear infinite;
+      font-family: "Anton", sans-serif;
+      font-size: 28px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .marquee-track .star { color: var(--gold); }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ===== Generic section ===== */
+    .section {
+      position: relative;
+      padding: 120px 32px;
+      max-width: 1480px;
+      margin: 0 auto;
+    }
+    .section-head {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 64px;
+      align-items: end;
+      margin-bottom: 80px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid var(--line);
+    }
+    .section-eyebrow {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+    .section-title {
+      font-family: "Anton", sans-serif;
+      font-weight: 400;
+      font-size: clamp(48px, 6vw, 96px);
+      letter-spacing: -0.01em;
+      line-height: 0.9;
+      text-transform: uppercase;
+      margin: 0;
+    }
+    .section-title em {
+      color: var(--accent);
+      font-style: italic;
+    }
+    .section-title .outline {
+      color: transparent;
+      -webkit-text-stroke: 1.5px var(--ink);
+    }
+    .section-sub {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--ink-dim);
+      max-width: 460px;
+      margin: 0;
+    }
+
+    /* ===== About / Sobre mí ===== */
+    .about-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .about-card {
+      position: sticky;
+      top: 120px;
+      border: 1px solid var(--line-strong);
+      padding: 28px;
+      background: rgba(15, 31, 56, 0.3);
+    }
+    .about-card-tag {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .about-card-tag::before {
+      content: "";
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+    .about-name {
+      font-family: "Anton", sans-serif;
+      font-size: 64px;
+      letter-spacing: -0.01em;
+      line-height: 0.92;
+      text-transform: uppercase;
+      margin: 0 0 6px;
+    }
+    .about-role {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+      margin-bottom: 24px;
+    }
+    .about-portrait {
+      aspect-ratio: 1;
+      width: 100%;
+      background: linear-gradient(180deg, #1f3a66 0%, #050d1a 100%);
+      display: grid;
+      place-items: center;
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-portrait::before {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border: 1px dashed var(--line-strong);
+    }
+    .about-portrait span {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-content {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .about-content p {
+      font-size: 19px;
+      line-height: 1.55;
+      color: var(--ink);
+      margin: 0;
+    }
+    .about-content p.lead {
+      font-size: 24px;
+      line-height: 1.4;
+      font-weight: 500;
+    }
+    .about-content p.lead em {
+      color: var(--accent);
+      font-style: italic;
+    }
+    .about-link {
+      display: inline-flex;
+      align-self: flex-start;
+      align-items: center;
+      gap: 12px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 6px;
+    }
+    .about-link:hover { color: var(--gold-bright); border-color: var(--gold-bright); }
+
+    /* ===== Steps / Cómo empezar ===== */
+    .steps-wrap {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 56px;
+    }
+    .step-card {
+      border: 1px solid var(--line-strong);
+      padding: 36px 28px;
+      background: rgba(15, 31, 56, 0.25);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.25s;
+    }
+    .step-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      background: rgba(15, 31, 56, 0.45);
+    }
+    .step-card::after {
+      content: "";
+      position: absolute;
+      top: 0; right: 0;
+      width: 16px; height: 16px;
+      border-top: 1px solid var(--accent);
+      border-right: 1px solid var(--accent);
+    }
+    .step-num {
+      font-family: "Anton", sans-serif;
+      font-size: 80px;
+      line-height: 1;
+      color: var(--accent);
+      letter-spacing: -0.04em;
+      margin-bottom: 24px;
+    }
+    .step-num small {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      color: var(--ink-faint);
+      vertical-align: top;
+      margin-left: 4px;
+    }
+    .step-title {
+      font-family: "Anton", sans-serif;
+      font-size: 26px;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      margin: 0 0 14px;
+    }
+    .step-body {
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--ink-dim);
+      margin: 0;
+    }
+    .step-body a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent);
+    }
+
+    .plazas-note {
+      border: 1px solid var(--accent);
+      padding: 22px 28px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      background: linear-gradient(90deg, rgba(212, 168, 74, 0.08), transparent);
+    }
+    .plazas-note .badge {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--navy-900);
+      background: var(--accent);
+      padding: 6px 12px;
+      flex-shrink: 0;
+      align-self: center;
+    }
+    .plazas-note p {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--ink);
+    }
+
+    /* ===== Philosophy ===== */
+    .philosophy-section {
+      background: linear-gradient(180deg, transparent, rgba(15, 31, 56, 0.4));
+    }
+    .philosophy-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .philosophy-side {
+      position: sticky;
+      top: 120px;
+    }
+    .philosophy-quote {
+      border-left: 2px solid var(--accent);
+      padding: 8px 0 8px 24px;
+    }
+    .philosophy-quote .q {
+      font-family: "Anton", sans-serif;
+      font-size: 40px;
+      line-height: 1;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      margin: 0 0 16px;
+    }
+    .philosophy-quote .q em {
+      color: var(--accent);
+      font-style: italic;
+    }
+    .philosophy-quote .attrib {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+
+    .wada-stamp {
+      margin-top: 32px;
+      border: 1px solid var(--line-strong);
+      padding: 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .wada-stamp .seal {
+      width: 48px; height: 48px;
+      border: 1.5px solid var(--accent);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-family: "Anton", sans-serif;
+      font-size: 18px;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .wada-stamp .meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .wada-stamp .meta .k {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 9px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+    .wada-stamp .meta .v {
+      font-family: "Anton", sans-serif;
+      font-size: 16px;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .philosophy-body p {
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--ink-dim);
+      margin: 0 0 22px;
+    }
+    .philosophy-body p.emphasis {
+      font-size: 19px;
+      color: var(--ink);
+    }
+    .philosophy-body strong {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    /* ===== Contact ===== */
+    .contact-section {
+      text-align: center;
+      padding: 140px 32px 160px;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-section .hero-glow {
+      width: 600px; height: 600px;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      filter: blur(60px);
+    }
+    .contact-eyebrow {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+    }
+    .contact-title {
+      font-family: "Anton", sans-serif;
+      font-size: clamp(60px, 9vw, 140px);
+      line-height: 0.9;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      margin: 0 0 48px;
+      position: relative;
+      z-index: 1;
+    }
+    .contact-title em {
+      color: var(--accent);
+      font-style: italic;
+    }
+    .contact-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: clamp(18px, 2.4vw, 28px);
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      text-decoration: none;
+      padding: 22px 36px;
+      border: 1px solid var(--line-strong);
+      background: rgba(15, 31, 56, 0.4);
+      backdrop-filter: blur(6px);
+      transition: all 0.25s;
+      position: relative;
+      z-index: 1;
+    }
+    .contact-email:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(212, 168, 74, 0.08);
+      transform: translateY(-2px);
+    }
+    .contact-email .at {
+      width: 8px; height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 12px var(--accent);
+      animation: pulse 1.4s infinite;
+    }
+    .contact-note {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-top: 48px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===== Planes ===== */
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 1px solid var(--line-strong);
+    }
+    .plan-card {
+      padding: 40px 32px;
+      border-right: 1px solid var(--line-strong);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      background: var(--navy-800);
+      position: relative;
+      transition: background 0.3s;
+    }
+    .plan-card:last-child { border-right: none; }
+    .plan-card:hover { background: var(--navy-700); }
+    .plan-card.is-featured {
+      background: var(--ink);
+      color: var(--navy-900);
+    }
+    .plan-card.is-featured .plan-name,
+    .plan-card.is-featured .plan-price,
+    .plan-card.is-featured .plan-features li { color: var(--navy-900); }
+    .plan-card.is-featured .plan-tag {
+      background: var(--magenta);
+      color: var(--ink);
+      border-color: transparent;
+    }
+    .plan-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .plan-tag {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 5px 10px;
+      background: rgba(244, 241, 234, 0.06);
+      color: var(--ink-dim);
+      border: 1px solid var(--line);
+    }
+    .plan-number {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      color: var(--ink-faint);
+    }
+    .plan-card.is-featured .plan-number { color: rgba(10, 22, 40, 0.5); }
+    .plan-name {
+      font-family: "Anton", sans-serif;
+      font-size: 44px;
+      line-height: 0.95;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      margin: 0;
+    }
+    .plan-name small {
+      display: block;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      margin-top: 8px;
+      color: var(--ink-dim);
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+    .plan-card.is-featured .plan-name small { color: rgba(10, 22, 40, 0.6); }
+    .plan-price {
+      font-family: "Anton", sans-serif;
+      font-size: 68px;
+      line-height: 1;
+      display: flex;
+      align-items: baseline;
+    }
+    .plan-price .currency { font-size: 28px; margin-right: 4px; }
+    .plan-price .period {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      margin-left: 8px;
+      color: var(--ink-dim);
+      text-transform: uppercase;
+    }
+    .plan-card.is-featured .plan-price .period { color: rgba(10, 22, 40, 0.6); }
+    .plan-divider { height: 1px; background: var(--line); }
+    .plan-card.is-featured .plan-divider { background: rgba(10, 22, 40, 0.15); }
+    .plan-features {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .plan-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--ink);
+      line-height: 1.4;
+    }
+    .plan-features li::before {
+      content: "+";
+      font-family: "JetBrains Mono", monospace;
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .plan-card.is-featured .plan-features li::before { color: var(--magenta); }
+    .plan-cta { margin-top: auto; padding-top: 16px; }
+    .plan-card.is-featured .btn-primary {
+      background: var(--navy-900);
+      color: var(--ink);
+    }
+    .plan-card.is-featured .btn-primary .arrow,
+    .plan-card.is-featured .btn-primary .arrow::after {
+      background: var(--ink);
+      border-color: var(--ink);
+    }
+
+    /* Mock-data notice — keeps the page honest */
+    .mock-notice {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      text-align: center;
+      margin-top: 24px;
+      padding: 14px;
+      border: 1px dashed var(--line-strong);
+    }
+    .mock-notice strong { color: var(--accent); font-weight: 600; }
+
+    /* Price detail under big number */
+    .plan-price-detail {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+      margin-top: -16px;
+    }
+    .plan-card.is-featured .plan-price-detail { color: rgba(10, 22, 40, 0.6); }
+    .plan-note {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin: 0;
+    }
+    .plan-card.is-featured .plan-note { color: rgba(10, 22, 40, 0.5); }
+
+    /* ===== Bonos presenciales ===== */
+    .bonos-wrap {
+      margin-top: 80px;
+      padding-top: 64px;
+      border-top: 1px solid var(--line);
+    }
+    .bonos-head {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 64px;
+      align-items: end;
+      margin-bottom: 40px;
+    }
+    .bonos-eyebrow {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .bonos-title {
+      font-family: "Anton", sans-serif;
+      font-weight: 400;
+      font-size: clamp(36px, 4.5vw, 64px);
+      letter-spacing: -0.01em;
+      line-height: 0.9;
+      text-transform: uppercase;
+      margin: 0;
+    }
+    .bonos-title em { color: var(--accent); font-style: italic; }
+    .bonos-sub {
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--ink-dim);
+      max-width: 420px;
+      margin: 0;
+    }
+    .bonos-sub strong { color: var(--ink); font-weight: 500; }
+
+    .bonos-table-wrap {
+      border: 1px solid var(--line-strong);
+      background: var(--navy-800);
+      overflow: hidden;
+    }
+    .bonos-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: "JetBrains Mono", monospace;
+    }
+    .bonos-table thead th {
+      background: rgba(212, 168, 74, 0.08);
+      border-bottom: 1px solid var(--line-strong);
+      padding: 20px 16px;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      text-align: center;
+      vertical-align: middle;
+    }
+    .bonos-table thead th:first-child { text-align: left; padding-left: 24px; }
+    .bonos-table thead th .th-icon {
+      display: block;
+      font-size: 16px;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+    .bonos-table thead th small {
+      display: block;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      color: var(--ink-faint);
+      margin-top: 4px;
+      font-weight: 400;
+    }
+    .bonos-table tbody td {
+      padding: 22px 16px;
+      border-bottom: 1px solid var(--line);
+      text-align: center;
+      vertical-align: middle;
+      font-size: 14px;
+      color: var(--ink);
+    }
+    .bonos-table tbody tr:last-child td { border-bottom: none; }
+    .bonos-table tbody tr:hover { background: rgba(244, 241, 234, 0.02); }
+
+    .bono-name {
+      text-align: left !important;
+      padding-left: 24px !important;
+      font-family: "Anton", sans-serif;
+      font-size: 22px;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .bono-name small {
+      display: block;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      color: var(--ink-faint);
+      margin-top: 4px;
+      font-weight: 400;
+    }
+    .bono-num { font-size: 18px; color: var(--ink); font-weight: 500; }
+    .bono-free {
+      font-family: "Anton", sans-serif;
+      font-size: 24px;
+      color: #38d171;
+      letter-spacing: 0.01em;
+    }
+    .bono-free.is-zero { color: var(--ink-faint); }
+    .bono-total {
+      font-family: "Anton", sans-serif;
+      font-size: 22px;
+      color: var(--ink);
+    }
+    .bono-price {
+      font-family: "Anton", sans-serif;
+      font-size: 24px;
+      color: var(--ink);
+    }
+    .bono-price small {
+      display: block;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: var(--ink-faint);
+      margin-top: 4px;
+      font-weight: 400;
+      text-transform: none;
+    }
+    .bono-perseason {
+      background: rgba(212, 168, 74, 0.06);
+      font-family: "Anton", sans-serif;
+      font-size: 20px;
+      color: var(--gold-bright);
+    }
+
+    .bonos-footer {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 32px;
+      align-items: center;
+      padding: 24px 28px;
+      background: rgba(15, 31, 56, 0.6);
+      border: 1px solid var(--line);
+      border-top: none;
+    }
+    .bonos-footer-note {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 14px;
+      color: var(--ink-dim);
+      line-height: 1.5;
+    }
+    .bonos-footer-note .star {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      border: 1px solid var(--accent);
+      display: grid;
+      place-items: center;
+      color: var(--accent);
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .bonos-footer-note .free-word { color: #38d171; font-weight: 600; }
+    .bonos-footer-tag {
+      font-family: "Anton", sans-serif;
+      font-size: 22px;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-align: right;
+      line-height: 1;
+    }
+    .bonos-footer-tag em { font-style: italic; color: var(--ink); }
+
+    /* Mobile card-view for bonos (hidden on desktop) */
+    .bonos-cards { display: none; }
+
+    /* ===== Método (4 pasos) ===== */
+    .method-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .method-quote {
+      position: sticky;
+      top: 120px;
+      border-left: 2px solid var(--accent);
+      padding: 8px 0 8px 28px;
+    }
+    .method-quote .q-text {
+      font-family: "Anton", sans-serif;
+      font-size: 38px;
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      margin: 0;
+    }
+    .method-quote .q-text em { font-style: italic; color: var(--accent); }
+    .method-quote .q-attribution {
+      margin-top: 24px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+    }
+    .method-steps { display: flex; flex-direction: column; gap: 0; }
+    .method-step {
+      padding: 32px 0;
+      border-top: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 24px;
+      transition: padding 0.3s, background 0.3s;
+    }
+    .method-step:last-child { border-bottom: 1px solid var(--line); }
+    .method-step:hover {
+      padding-left: 16px;
+      background: linear-gradient(90deg, rgba(212, 168, 74, 0.04), transparent 60%);
+    }
+    .method-step-num {
+      font-family: "Anton", sans-serif;
+      font-size: 56px;
+      line-height: 0.9;
+      color: var(--ink-faint);
+      font-style: italic;
+      transition: color 0.3s;
+    }
+    .method-step:hover .method-step-num { color: var(--accent); }
+    .method-step-content h3 {
+      margin: 0 0 12px;
+      font-family: "Anton", sans-serif;
+      font-size: 30px;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      line-height: 1;
+    }
+    .method-step-content p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+    .method-step-content .tags {
+      margin-top: 14px;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .method-step-content .tags span {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 9px;
+      padding: 4px 8px;
+      background: rgba(244, 241, 234, 0.05);
+      border: 1px solid var(--line);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+    }
+
+    /* ===== Transformaciones (Antes / Después) ===== */
+    .transform-section {
+      background: var(--navy-800);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      max-width: none;
+    }
+    .transform-section-inner {
+      max-width: 1480px;
+      margin: 0 auto;
+    }
+    .transform-rail {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .transform-card {
+      background: var(--navy-900);
+      border: 1px solid var(--line);
+      overflow: hidden;
+    }
+    .transform-card-head {
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .transform-card-head .name { color: var(--ink); }
+    .transform-card-head .weeks { color: var(--accent); }
+
+    .ba-slider {
+      position: relative;
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      user-select: none;
+      touch-action: none;
+    }
+    .ba-img {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ba-img.after {
+      background: linear-gradient(135deg, #1a3a6b 0%, #0a1628 100%);
+    }
+    .ba-img.before {
+      background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+      clip-path: polygon(0 0, var(--pct, 50%) 0, var(--pct, 50%) 100%, 0 100%);
+    }
+    .ba-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    /* Tarjeta de transformación con imagen única (compuesta antes/después) */
+    .ba-single {
+      position: relative;
+      aspect-ratio: 4/5;
+      overflow: hidden;
+    }
+    .ba-single img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .ba-single .ba-single-badge {
+      position: absolute;
+      left: 12px;
+      bottom: 12px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink);
+      background: var(--magenta);
+      padding: 4px 10px;
+      z-index: 2;
+    }
+    .ba-img-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      background-image: repeating-linear-gradient(
+        45deg,
+        rgba(244, 241, 234, 0.04) 0,
+        rgba(244, 241, 234, 0.04) 1px,
+        transparent 1px,
+        transparent 12px
+      );
+    }
+    .ba-img-placeholder .silhouette {
+      width: 50%;
+      max-width: 180px;
+      height: 60%;
+      max-height: 320px;
+    }
+    .ba-img-placeholder .silhouette svg { width: 100%; height: 100%; }
+    .ba-img-placeholder .ph-label {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+    .ba-img-placeholder .ph-pending {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding: 4px 10px;
+      border: 1px solid var(--accent);
+    }
+    .ba-divider {
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 3px;
+      background: var(--magenta);
+      box-shadow: 0 0 18px rgba(255, 43, 212, 0.7), 0 0 4px rgba(255, 255, 255, 0.6);
+      left: var(--pct, 50%);
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+    .ba-handle {
+      position: absolute;
+      top: 50%;
+      left: var(--pct, 50%);
+      transform: translate(-50%, -50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--magenta);
+      box-shadow: 0 0 24px rgba(255, 43, 212, 0.5), 0 4px 12px rgba(0, 0, 0, 0.4);
+      display: grid;
+      place-items: center;
+      pointer-events: none;
+      color: var(--ink);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .ba-label {
+      position: absolute;
+      top: 16px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 6px 10px;
+      z-index: 2;
+    }
+    .ba-label.before {
+      left: 16px;
+      background: var(--navy-900);
+      color: var(--ink);
+      border: 1px solid var(--line-strong);
+    }
+    .ba-label.after {
+      right: 16px;
+      background: var(--accent);
+      color: var(--navy-900);
+    }
+    .transform-card-foot {
+      padding: 16px 20px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .transform-card-foot .pending {
+      flex: 1;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .transform-card-foot .pending::before {
+      content: "";
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 1.4s infinite;
+    }
+    .transform-card-foot .foot-note {
+      flex: 1;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-soft, var(--ink));
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .transform-card-foot .foot-note::before {
+      content: "";
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gold-bright, #d8b26a);
+    }
+
+    /* ===== Equipo ===== */
+    .coaches-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line-strong);
+    }
+    .coach-card {
+      background: var(--navy-800);
+      position: relative;
+      transition: background 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+    .coach-card:hover { background: var(--navy-700); }
+    .coach-card.is-pending {
+      background: rgba(15, 31, 56, 0.4);
+    }
+    .coach-photo {
+      aspect-ratio: 4/5;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      padding: 20px;
+      background: linear-gradient(180deg, #1f3a66 0%, #050d1a 100%);
+      background-image: repeating-linear-gradient(
+        45deg,
+        rgba(244, 241, 234, 0.03) 0,
+        rgba(244, 241, 234, 0.03) 1px,
+        transparent 1px,
+        transparent 14px
+      ), linear-gradient(180deg, #1f3a66 0%, #050d1a 100%);
+    }
+    .coach-photo.pending {
+      background: rgba(15, 31, 56, 0.6);
+      background-image: repeating-linear-gradient(
+        45deg,
+        rgba(244, 241, 234, 0.04) 0,
+        rgba(244, 241, 234, 0.04) 1px,
+        transparent 1px,
+        transparent 14px
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .coach-photo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(5, 13, 26, 0.9), transparent 60%);
+      pointer-events: none;
+    }
+    .coach-photo.pending::after { display: none; }
+    .coach-photo .photo-label {
+      position: relative;
+      z-index: 2;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+    .coach-photo.pending .photo-label {
+      color: var(--accent);
+      padding: 6px 12px;
+      border: 1px solid var(--accent);
+    }
+    .coach-info {
+      padding: 28px;
+      border-top: 1px solid var(--line);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .coach-row1 {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 18px;
+    }
+    .coach-name {
+      font-family: "Anton", sans-serif;
+      font-size: 32px;
+      line-height: 0.95;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+    }
+    .coach-role {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-top: 6px;
+    }
+    .coach-id {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      color: var(--ink-faint);
+    }
+    .coach-bio {
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--ink-dim);
+      margin: 0 0 18px;
+      flex: 1;
+    }
+    .coach-bio.pending { color: var(--ink-faint); font-style: italic; }
+    .coach-specs {
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .coach-specs .row {
+      display: flex;
+      justify-content: space-between;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .coach-specs .row span:first-child { color: var(--ink-faint); }
+    .coach-specs .row span:last-child { color: var(--ink); }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 900px) {
+      .top-nav { padding: 14px 18px; }
+      .nav-links { display: none; }
+      .hero { padding: 110px 18px 60px; }
+      .hero-main { grid-template-columns: 1fr; gap: 40px; align-items: start; }
+      .hero-title { font-size: clamp(56px, 16vw, 100px); }
+      .section { padding: 80px 18px; }
+      .section-head { grid-template-columns: 1fr; gap: 24px; margin-bottom: 48px; }
+      .about-wrap { grid-template-columns: 1fr; gap: 40px; }
+      .about-card { position: relative; top: 0; }
+      .about-name { font-size: 44px; }
+      .steps-wrap { grid-template-columns: 1fr; }
+      .philosophy-wrap { grid-template-columns: 1fr; gap: 40px; }
+      .philosophy-side { position: relative; top: 0; }
+      .philosophy-quote .q { font-size: 30px; }
+      .contact-section { padding: 80px 18px 100px; }
+      .hero-meta { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .plans-grid { grid-template-columns: 1fr; }
+      .plan-card { border-right: none; border-bottom: 1px solid var(--line-strong); }
+      .plan-card:last-child { border-bottom: none; }
+      .plan-name { font-size: 36px; }
+      .plan-price { font-size: 56px; }
+      .method-wrap { grid-template-columns: 1fr; gap: 40px; }
+      .method-quote { position: relative; top: 0; }
+      .method-quote .q-text { font-size: 28px; }
+      .transform-rail { grid-template-columns: 1fr; }
+      .coaches-grid { grid-template-columns: 1fr; }
+
+      /* Bonos: hide table, show cards */
+      .bonos-wrap { margin-top: 60px; padding-top: 48px; }
+      .bonos-head { grid-template-columns: 1fr; gap: 20px; align-items: start; margin-bottom: 28px; }
+      .bonos-table-wrap { display: none; }
+      .bonos-footer {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        text-align: center;
+        padding: 20px;
+        border-top: 1px solid var(--line);
+      }
+      .bonos-footer-tag { text-align: center; font-size: 18px; }
+      .bonos-footer-note { font-size: 13px; text-align: left; }
+
+      .bonos-cards {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 0;
+      }
+      .bono-card {
+        border: 1px solid var(--line-strong);
+        background: var(--navy-800);
+        padding: 20px;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 16px 20px;
+        align-items: center;
+      }
+      .bono-card-head {
+        grid-column: 1 / -1;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding-bottom: 14px;
+        border-bottom: 1px solid var(--line);
+        margin-bottom: 2px;
+      }
+      .bono-card-head .name {
+        font-family: "Anton", sans-serif;
+        font-size: 28px;
+        letter-spacing: 0.01em;
+        text-transform: uppercase;
+        color: var(--ink);
+        line-height: 1;
+      }
+      .bono-card-head .name small {
+        display: block;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 9px;
+        letter-spacing: 0.22em;
+        color: var(--ink-faint);
+        margin-top: 4px;
+        font-weight: 400;
+      }
+      .bono-card-head .price {
+        font-family: "Anton", sans-serif;
+        font-size: 30px;
+        color: var(--accent);
+      }
+      .bono-card-row {
+        display: contents;
+      }
+      .bono-card-row .label {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--ink-faint);
+      }
+      .bono-card-row .value {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 14px;
+        color: var(--ink);
+        text-align: right;
+      }
+      .bono-card-row .value.free { color: #38d171; font-weight: 600; font-size: 16px; font-family: "Anton", sans-serif; letter-spacing: 0.02em; }
+      .bono-card-row .value.free.is-zero { color: var(--ink-faint); }
+      .bono-card-row .value.total { color: var(--ink); font-weight: 500; }
+      .bono-card-row .value.per { color: var(--gold-bright); }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ===== Custom cursor (desktop only) ===== -->
+  <div class="cursor-root" id="cursorRoot">
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-orbit" id="cursorOrbit">
+      <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <path id="cursorOrbitPath" d="M 80,80 m -64,0 a 64,64 0 1,1 128,0 a 64,64 0 1,1 -128,0" />
+        </defs>
+        <text>
+          <textPath href="#cursorOrbitPath" startOffset="0">
+            ESCRÍBEME ✦ CULTURISMO NATURAL ✦ SIN ATAJOS ✦ ESCRÍBEME ✦ CULTURISMO NATURAL ✦ SIN ATAJOS ✦
+          </textPath>
+        </text>
+      </svg>
+      <div class="cursor-orbit-inner">
+        <div class="arrow-circle">→</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Top nav ===== -->
+  <nav class="top-nav">
+    <a href="#hero" class="brand" style="text-decoration: none; color: inherit;">
+      <div class="brand-mark">A</div>
+      <div class="brand-text">
+        <div class="name">ANF TRAINER</div>
+        <div class="sub">Culturismo natural · España</div>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#sobre-mi" class="nav-link" data-section="sobre-mi">Sobre mí</a>
+      <a href="#planes" class="nav-link" data-section="planes">Planes</a>
+      <a href="#metodo" class="nav-link" data-section="metodo">Método</a>
+      <a href="#transformaciones" class="nav-link" data-section="transformaciones">Resultados</a>
+      <a href="#equipo" class="nav-link" data-section="equipo">Equipo</a>
+      <a href="#contacto" class="nav-link" data-section="contacto">Contacto</a>
+    </div>
+    <a href="mailto:ANFtrainer@gmail.com" class="nav-cta ribbon-target">
+      <span class="dot"></span>
+      Escríbeme
+    </a>
+  </nav>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero" id="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-glow-2"></div>
+
+    <div class="hero-meta">
+      <div class="hero-meta-l">
+        <span>ANF · TRAINER</span>
+        <span class="dash"></span>
+        <span>Online · España</span>
+      </div>
+      <div class="hero-meta-r">
+        <span class="live"><span></span> Plazas limitadas</span>
+      </div>
+    </div>
+
+    <div class="hero-main">
+      <h1 class="display hero-title">
+        <span class="l1">Tu nueva</span>
+        <span class="l2"><span class="accent-word">versión</span> nunca</span>
+        <span class="l3">estuvo más cerca</span>
+      </h1>
+      <div class="hero-side">
+        <span class="hero-side-tag">Coaching 1-a-1</span>
+        <p class="hero-side-text">
+          Soy <strong>Arturo</strong>, llevo <strong>+18 años</strong> apasionado por los hierros.
+          Con mi marca <strong>ANFtrainer</strong> contagio a otros para que vivan el deporte y
+          el levantamiento de pesas <strong>de forma natural</strong>, sin atajos ni sustancias prohibidas.
+        </p>
+        <div class="hero-cta-row">
+          <a href="mailto:ANFtrainer@gmail.com" class="btn-primary ribbon-target">
+            Escríbeme
+            <span class="arrow"></span>
+          </a>
+          <a href="#empezar" class="btn-ghost">Cómo empezar</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Marquee ===== -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>SIN ATAJOS</span><span class="star">✦</span>
+      <span>SOLO PROGRESIÓN</span><span class="star">✦</span>
+      <span>CULTURISMO NATURAL</span><span class="star">✦</span>
+      <span>ANF · METHOD</span><span class="star">✦</span>
+      <span>WADA · CLEAN</span><span class="star">✦</span>
+      <span>SIN ATAJOS</span><span class="star">✦</span>
+      <span>SOLO PROGRESIÓN</span><span class="star">✦</span>
+      <span>CULTURISMO NATURAL</span><span class="star">✦</span>
+      <span>ANF · METHOD</span><span class="star">✦</span>
+      <span>WADA · CLEAN</span><span class="star">✦</span>
+    </div>
+  </div>
+
+  <!-- ===== Sobre mí ===== -->
+  <section class="section" id="sobre-mi">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">[ 01 ] Sobre mí · Sobre ti</div>
+        <h2 class="section-title">Hola, <em>soy</em> Arturo.</h2>
+      </div>
+      <p class="section-sub">
+        Detrás de ANFtrainer hay una sola persona y una sola obsesión: hacer del levantamiento
+        de pesas un camino sostenible, honesto y natural.
+      </p>
+    </div>
+
+    <div class="about-wrap">
+      <div class="about-card">
+        <div class="about-card-tag">Coach</div>
+        <div class="about-portrait">
+          <span>[ Retrato · Arturo ]</span>
+        </div>
+        <div class="about-name">Arturo</div>
+        <div class="about-role">Fundador · ANFtrainer</div>
+      </div>
+
+      <div class="about-content">
+        <p class="lead">
+          Me llamo <strong>Arturo</strong>, fundador de <strong>ANFtrainer</strong>. Desde hace
+          <strong>+19 años</strong> llevo <em>levantando hierros</em>, apasionado por el mundo del
+          deporte y la cultura física siguiendo su filosofía, muchas veces peleándome contra la
+          rutina y los deberes del día a día.
+        </p>
+        <p>
+          He podido aprender y desarrollar una amplia experiencia en este ámbito que me ha permitido
+          acompañar a personas que buscaban mejorar, no solo una mejora física sino también mental,
+          transmitiéndoles toda la experiencia de todos estos años para que crezcan de una forma más
+          rápida, segura y sobre todo sana.
+        </p>
+        <p>
+          He podido aprender de grandes entrenadores como Javier Lavandera, yendo a seminarios de
+          distinta índole como el de Piti Pinsach para trabajo hipopresivo y suelo pélvico, salud del
+          pie, Natural Classic, etc. Dar clases dirigidas de distintas disciplinas como entrenamientos
+          metabólicos, bodypump, mantenimiento y sala en diversos gimnasios.
+        </p>
+        <p>
+          Ahora, como experto en culturismo natural, futuro dietista superior en alimentación humana,
+          monitor de actividades dirigidas y entrenador personal certificado en España y a nivel
+          europeo, me pongo a disposición a través de <strong>ANFtrainer</strong> para todas aquellas
+          personas que quieran contagiarse de la cultura y filosofía del deporte sin sustancias
+          dopantes.
+        </p>
+        <p class="lead">
+          Porque aquí: <em>“Las personas normales se vuelven excepcionales”</em>
+        </p>
+        <a href="https://anftrainer.com/hello-world/" class="about-link" target="_blank" rel="noopener">
+          Leer más sobre mí
+          <span style="display:inline-block;width:14px;height:1px;background:currentColor;position:relative;">
+            <span style="position:absolute;right:0;top:-3px;width:7px;height:7px;border-top:1px solid currentColor;border-right:1px solid currentColor;transform:rotate(45deg);"></span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Cómo empezar ===== -->
+  <section class="section" id="empezar">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">[ 02 ] Cómo empezar</div>
+        <h2 class="section-title"><em>Tres</em> pasos. Nunca ha sido tan fácil.</h2>
+      </div>
+      <p class="section-sub">
+        El proceso es sencillo y directo. Sin compromisos ocultos, sin paquetes inventados.
+        Hablamos, valoramos y decidimos juntos.
+      </p>
+    </div>
+
+    <div class="steps-wrap">
+      <article class="step-card">
+        <div class="step-num">1<small>º</small></div>
+        <h3 class="step-title">Envíame un correo</h3>
+        <p class="step-body">
+          Escríbeme a
+          <a href="mailto:ANFtrainer@gmail.com">ANFtrainer@gmail.com</a>
+          y explícame tu caso: tu punto de partida, qué buscas y cuánto tiempo llevas entrenando.
+        </p>
+      </article>
+
+      <article class="step-card">
+        <div class="step-num">2<small>º</small></div>
+        <h3 class="step-title">Recibirás la entrevista</h3>
+        <p class="step-body">
+          Una vez aceptada la solicitud te enviaré el archivo de la entrevista vía email
+          para que la rellenes con calma. Es la base sobre la que se construye todo.
+        </p>
+      </article>
+
+      <article class="step-card">
+        <div class="step-num">3<small>º</small></div>
+        <h3 class="step-title">Concertamos cita</h3>
+        <p class="step-body">
+          Teniendo los datos concertamos cita —presencial o por videollamada— para
+          concretar entrenamiento y demás instrucciones.
+        </p>
+      </article>
+    </div>
+
+    <div class="plazas-note">
+      <span class="badge">Aviso</span>
+      <p>
+        <strong>Plazas LIMITADAS.</strong> En caso de que las plazas estén completas
+        podrás realizar una <strong>pre-inscripción</strong> para reservar la siguiente plaza disponible.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== Planes ===== -->
+  <section class="section" id="planes">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">[ 03 ] Planes</div>
+        <h2 class="section-title">Tres caminos. <em>Un</em> resultado.</h2>
+      </div>
+      <p class="section-sub">
+        Elige según tu punto de partida. Todos los planes incluyen seguimiento personal
+        de Arturo y acceso a la metodología ANF.
+      </p>
+    </div>
+
+    <div class="plans-grid">
+      <article class="plan-card">
+        <div class="plan-head">
+          <span class="plan-tag">Asesoría</span>
+          <span class="plan-number">01 / 03</span>
+        </div>
+        <h3 class="plan-name">
+          CONSULTA
+          <small>1 Asesoría</small>
+        </h3>
+        <div class="plan-price">
+          <span class="currency">€</span>50
+        </div>
+        <p class="plan-price-detail">Pago único · Sesión 1-a-1</p>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Corrección de biomecánica</li>
+          <li>Guía de programación</li>
+          <li>Pautas de alimentación</li>
+          <li>Resolución de dudas en directo</li>
+        </ul>
+        <div class="plan-cta">
+          <a href="mailto:ANFtrainer@gmail.com?subject=Plan%20CONSULTA" class="btn-primary ribbon-target">
+            Reservar consulta
+            <span class="arrow"></span>
+          </a>
+        </div>
+      </article>
+
+      <article class="plan-card is-featured">
+        <div class="plan-head">
+          <span class="plan-tag">Más popular</span>
+          <span class="plan-number">02 / 03</span>
+        </div>
+        <h3 class="plan-name">
+          BASE
+          <small>Online · 3 meses</small>
+        </h3>
+        <div class="plan-price">
+          <span class="currency">€</span>195
+          <span class="period">/ 3 meses</span>
+        </div>
+        <p class="plan-price-detail">Equivale a 65 €/mes</p>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Rutina de entrenamiento personalizada</li>
+          <li>Corrección y adaptación de ejercicios</li>
+          <li>Guía nutricional con macros calculados</li>
+          <li>Medición antropométrica presencial o guiada</li>
+          <li>Revisión quincenal (a valorar) 1-a-1 presencial o videollamada</li>
+          <li>Soporte WhatsApp 7 días y acceso a ANFteam</li>
+          <li>Ajustes mensuales del plan</li>
+          <li>Preferencia en los eventos</li>
+        </ul>
+        <div class="plan-cta">
+          <a href="mailto:ANFtrainer@gmail.com?subject=Plan%20BASE" class="btn-primary ribbon-target">
+            Elegir BASE
+            <span class="arrow"></span>
+          </a>
+        </div>
+      </article>
+
+      <article class="plan-card">
+        <div class="plan-head">
+          <span class="plan-tag">Presencial · Plazas limitadas</span>
+          <span class="plan-number">03 / 03</span>
+        </div>
+        <h3 class="plan-name">
+          PRO
+          <small>Presencial</small>
+        </h3>
+        <div class="plan-price">
+          <span class="currency">€</span>180
+          <span class="period">/ mes</span>
+        </div>
+        <p class="plan-price-detail">Sujeto a horarios · Consultar</p>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Todo lo del plan Base, además:</li>
+          <li>Acceso al GYM-Estudio oficial ANFtrainer</li>
+          <li>Aire acondicionado</li>
+          <li>Medición antropométrica por bioimpedancia o calibre</li>
+          <li>Entrenamiento 100% personalizado 1-a-1</li>
+          <li>Soporte WhatsApp y acceso a ANFteam</li>
+          <li>Preferencia en los eventos del equipo</li>
+          <li>Introducción al posing y fotos</li>
+        </ul>
+        <div class="plan-cta">
+          <a href="mailto:ANFtrainer@gmail.com?subject=Plan%20PRO" class="btn-primary ribbon-target">
+            Elegir PRO
+            <span class="arrow"></span>
+          </a>
+        </div>
+      </article>
+    </div>
+
+    <!-- ===== Bonos presenciales ===== -->
+    <div class="bonos-wrap">
+      <div class="bonos-head">
+        <div>
+          <div class="bonos-eyebrow">[ 03.B ] Bonos presenciales · Nueva categoría</div>
+          <h3 class="bonos-title">Más sesiones. <em>Más</em> progreso.</h3>
+        </div>
+        <p class="bonos-sub">
+          Sesiones presenciales 1-a-1 con Arturo. <strong>Todas las sesiones a 30 €</strong>
+          (precio estándar, sin descuentos). Al contratar bonos más grandes, recibes
+          <strong style="color:#38d171">sesiones gratis</strong> como recompensa al compromiso.
+        </p>
+      </div>
+
+      <!-- Desktop table -->
+      <div class="bonos-table-wrap">
+        <table class="bonos-table">
+          <thead>
+            <tr>
+              <th>
+                <span class="th-icon">▶</span>
+                Bono
+              </th>
+              <th>
+                <span class="th-icon">▦</span>
+                Contratadas
+                <small>Sesiones que pagas</small>
+              </th>
+              <th>
+                <span class="th-icon">✦</span>
+                Gratis
+                <small>De regalo</small>
+              </th>
+              <th>
+                <span class="th-icon">◆</span>
+                Total
+                <small>Sesiones reales</small>
+              </th>
+              <th>
+                <span class="th-icon">€</span>
+                Precio total
+                <small>Solo contratadas</small>
+              </th>
+              <th>
+                <span class="th-icon">◉</span>
+                Por sesión
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="bono-name">3 <small>sesiones</small></td>
+              <td class="bono-num">3</td>
+              <td><span class="bono-free is-zero">0</span></td>
+              <td class="bono-total">3</td>
+              <td class="bono-price">90 € <small>(3 × 30 €)</small></td>
+              <td class="bono-perseason">30,00 €</td>
+            </tr>
+            <tr>
+              <td class="bono-name">6 <small>sesiones</small></td>
+              <td class="bono-num">6</td>
+              <td><span class="bono-free">+1</span></td>
+              <td class="bono-total">7</td>
+              <td class="bono-price">180 € <small>(6 × 30 €)</small></td>
+              <td class="bono-perseason">30,00 €</td>
+            </tr>
+            <tr>
+              <td class="bono-name">10 <small>sesiones</small></td>
+              <td class="bono-num">10</td>
+              <td><span class="bono-free">+2</span></td>
+              <td class="bono-total">12</td>
+              <td class="bono-price">300 € <small>(10 × 30 €)</small></td>
+              <td class="bono-perseason">30,00 €</td>
+            </tr>
+            <tr>
+              <td class="bono-name">16 <small>sesiones</small></td>
+              <td class="bono-num">16</td>
+              <td><span class="bono-free">+4</span></td>
+              <td class="bono-total">20</td>
+              <td class="bono-price">480 € <small>(16 × 30 €)</small></td>
+              <td class="bono-perseason">30,00 €</td>
+            </tr>
+            <tr>
+              <td class="bono-name">24 <small>sesiones</small></td>
+              <td class="bono-num">24</td>
+              <td><span class="bono-free">+6</span></td>
+              <td class="bono-total">30</td>
+              <td class="bono-price">720 € <small>(24 × 30 €)</small></td>
+              <td class="bono-perseason">30,00 €</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Mobile cards -->
+      <div class="bonos-cards">
+        <article class="bono-card">
+          <div class="bono-card-head">
+            <div class="name">3 <small>Sesiones</small></div>
+            <div class="price">90 €</div>
+          </div>
+          <div class="bono-card-row">
+            <span class="label">Contratadas</span>
+            <span class="value">3 × 30 €</span>
+          </div>
+          <div class="bono-card-row">
+            <span class="label">Gratis</span>
+            <span class="value free is-zero">0</span>
+          </div>
+          <div class="bono-card-row">
+            <span class="label">Total sesiones</span>
+            <span class="value total">3</span>
+          </div>
+          <div class="bono-card-row">
+            <span class="label">Por sesión</span>
+            <span class="value per">30,00 €</span>
+          </div>
+        </article>
+
+        <article class="bono-card">
+          <div class="bono-card-head">
+            <div class="name">6 <small>Sesiones</small></div>
+            <div class="price">180 €</div>
+          </div>
+          <div class="bono-card-row">
+            <span class="label">Contratadas</span>
+            <span class="value">6 × 30 €</span>
+          </div>
+          <div class="bono-card-row">
+            <span class="label">Gratis</span>
+            <span class="value free">+1</span>
+          </div>
+          <div class="bono-card-row">
+            <span class="label">Total sesiones</span>
+            <span class="value total">7</span>
+          </div>
+          <div class="bono-card-row">
+            <span class="label">Por sesión</span>
+            <span class="value per">30,00 €</span>
+          </div>
+        </article>
+
+        <article class="bono-card">
+          <div class="bono-card-head">
+            <div class="name">10 <small>Sesiones</small></div>
+            <div class="price">300 €</div>
+          </div>
+          <div class="bono-card-row">
+            <span class="label">Contratadas</span>
+            <span class="value">10 × 30 €</span>
+          </div>
+          <div class="bono-card-row">
+            <span class="label">Gratis</span>
+            <span class="value free">+2</span>
+          </div>
+          <div class="bono-card-row">
+            <span class="label">Total sesiones</span>
+            <span class="value total">12</span>
+          </div>
+          <div class="bono-card-row">
+            <span class="label">Por sesión</span>
+            <span class="value per">30,00 €</span>
+          </div>
+        </article>
+
+        <article class="bono-card">
+          <div class="bono-card-head">
+            <div class="name">16 <small>Sesiones</small></div>
+            <div class="price">480 €</div>
+          </div>
+          <div class="bono-card-row">
+            <span class="label">Contratadas</span>
+            <span class="value">16 × 30 €</span>
+          </div>
+          <div class="bono-card-row">
+            <span class="label">Gratis</span>
+            <span class="value free">+4</span>
+          </div>
+          <div class="bono-card-row">
+            <span class="label">Total sesiones</span>
+            <span class="value total">20</span>
+          </div>
+          <div class="bono-card-row">
+            <span class="label">Por sesión</span>
+            <span class="value per">30,00 €</span>
+          </div>
+        </article>
+
+        <article class="bono-card">
+          <div class="bono-card-head">
+            <div class="name">24 <small>Sesiones</small></div>
+            <div class="price">720 €</div>
+          </div>
+          <div class="bono-card-row">
+            <span class="label">Contratadas</span>
+            <span class="value">24 × 30 €</span>
+          </div>
+          <div class="bono-card-row">
+            <span class="label">Gratis</span>
+            <span class="value free">+6</span>
+          </div>
+          <div class="bono-card-row">
+            <span class="label">Total sesiones</span>
+            <span class="value total">30</span>
+          </div>
+          <div class="bono-card-row">
+            <span class="label">Por sesión</span>
+            <span class="value per">30,00 €</span>
+          </div>
+        </article>
+      </div>
+
+      <div class="bonos-footer">
+        <div class="bonos-footer-note">
+          <span class="star">★</span>
+          <span>
+            En todas las opciones, las sesiones <span class="free-word">GRATIS</span> (en verde)
+            tienen el mismo valor de <strong style="color:var(--ink)">30 € por sesión</strong>.
+            Sujeto a reserva.
+          </span>
+        </div>
+        <a href="mailto:ANFtrainer@gmail.com?subject=Bonos%20presenciales" class="btn-primary ribbon-target" style="white-space:nowrap;">
+          Reservar bono
+          <span class="arrow"></span>
+        </a>
+      </div>
+    </div>
+
+    <div class="mock-notice">
+      <strong>Plazas limitadas ·</strong> Bonos presenciales sujetos a horarios y reserva. Escribe a ANFtrainer@gmail.com para confirmar disponibilidad.
+    </div>
+  </section>
+
+  <!-- ===== Método ===== -->
+  <section class="section" id="metodo">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">[ 04 ] Método</div>
+        <h2 class="section-title">Sin atajos. <em>Solo</em> progresión.</h2>
+      </div>
+      <p class="section-sub">
+        La metodología ANF se apoya en cuatro pilares y en literatura de hipertrofia y fuerza.
+        Sin trucos. Sin químicos.
+      </p>
+    </div>
+
+    <div class="method-wrap">
+      <aside class="method-quote">
+        <p class="q-text">
+          "El cuerpo es <em>honesto</em>. Te devuelve exactamente lo que le entregas — ni más, ni menos."
+        </p>
+        <div class="q-attribution">— Arturo · Fundador ANF</div>
+      </aside>
+
+      <div class="method-steps">
+        <div class="method-step">
+          <div class="method-step-num">01</div>
+          <div class="method-step-content">
+            <h3>Diagnóstico</h3>
+            <p>Análisis completo: bioimpedancia, fuerza máxima, hábitos, sueño, bloodwork básico. Definimos el punto de partida real, no el percibido.</p>
+            <div class="tags">
+              <span>DEXA</span><span>1RM</span><span>Anamnesis</span><span>RFE</span>
+            </div>
+          </div>
+        </div>
+        <div class="method-step">
+          <div class="method-step-num">02</div>
+          <div class="method-step-content">
+            <h3>Programación</h3>
+            <p>Periodización ondulada según tu perfil. Bloques de hipertrofia, fuerza y descarga ajustados a tu recuperación. Sin plantillas.</p>
+            <div class="tags">
+              <span>Bloques</span><span>RPE</span><span>Volumen</span>
+            </div>
+          </div>
+        </div>
+        <div class="method-step">
+          <div class="method-step-num">03</div>
+          <div class="method-step-content">
+            <h3>Ejecución</h3>
+            <p>Seguimiento semanal por vídeo. Auditamos técnica, RIR y carga progresiva. Lo que no se mide, no mejora. Datos en cada sesión.</p>
+            <div class="tags">
+              <span>Vídeo-review</span><span>Logs</span><span>Feedback</span>
+            </div>
+          </div>
+        </div>
+        <div class="method-step">
+          <div class="method-step-num">04</div>
+          <div class="method-step-content">
+            <h3>Iteración</h3>
+            <p>Cada 4 semanas re-evaluamos y ajustamos macros, volumen y prioridades. La adherencia se construye con cambios pequeños y medibles.</p>
+            <div class="tags">
+              <span>Check-in</span><span>Re-test</span><span>Ajuste</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Transformaciones ===== -->
+  <section class="section transform-section" id="transformaciones">
+    <div class="transform-section-inner">
+      <div class="section-head">
+        <div>
+          <div class="section-eyebrow">[ 05 ] Transformaciones</div>
+          <h2 class="section-title"><em>Arrastra</em> y mira la <span class="outline">verdad</span>.</h2>
+        </div>
+        <p class="section-sub">
+          Casos reales, <strong style="color:var(--accent)">100% naturales</strong>.
+          Arrastra el control de cada tarjeta para comparar el antes y el después.
+        </p>
+      </div>
+
+      <div class="transform-rail">
+        <article class="transform-card">
+          <div class="transform-card-head">
+            <span class="name">Caso A</span>
+            <span class="weeks">Culturismo natural</span>
+          </div>
+          <div class="ba-slider" data-ba data-pct="50">
+            <div class="ba-img after">
+              <img class="ba-photo" src="jdespues.jpeg" alt="Después — definición muscular tras el proceso" loading="lazy" />
+            </div>
+            <div class="ba-img before">
+              <img class="ba-photo" src="jantes.jpeg" alt="Antes — punto de partida" loading="lazy" />
+            </div>
+            <span class="ba-label before">Antes</span>
+            <span class="ba-label after">Después</span>
+            <div class="ba-divider"></div>
+            <div class="ba-handle">‹›</div>
+          </div>
+          <div class="transform-card-foot">
+            <div class="foot-note">Recomposición corporal · 100% natural</div>
+          </div>
+        </article>
+
+        <article class="transform-card">
+          <div class="transform-card-head">
+            <span class="name">Caso B</span>
+            <span class="weeks">Pérdida de grasa</span>
+          </div>
+          <div class="ba-slider" data-ba data-pct="50">
+            <div class="ba-img after">
+              <img class="ba-photo" src="c1despues.jpeg" alt="Después — perfil tras la recomposición" loading="lazy" />
+            </div>
+            <div class="ba-img before">
+              <img class="ba-photo" src="c1antes.jpeg" alt="Antes — perfil de partida" loading="lazy" />
+            </div>
+            <span class="ba-label before">Antes</span>
+            <span class="ba-label after">Después</span>
+            <div class="ba-divider"></div>
+            <div class="ba-handle">‹›</div>
+          </div>
+          <div class="transform-card-foot">
+            <div class="foot-note">Cintura y core · progresión sana</div>
+          </div>
+        </article>
+
+        <article class="transform-card">
+          <div class="transform-card-head">
+            <span class="name">Caso C</span>
+            <span class="weeks">−12 kg · 4 meses</span>
+          </div>
+          <div class="ba-single">
+            <span class="ba-single-badge">Antes / Después</span>
+            <img src="chicaantesydespues.jpeg" alt="Antes y después — pérdida de 12 kg en 4 meses" loading="lazy" />
+          </div>
+          <div class="transform-card-foot">
+            <div class="foot-note">−12 kg en 4 meses · 100% natural</div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Equipo ===== -->
+  <section class="section" id="equipo">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">[ 06 ] Equipo</div>
+        <h2 class="section-title">Equipo <em>real</em>. Nada de <span class="outline">algoritmos</span>.</h2>
+      </div>
+      <p class="section-sub">
+        Hoy ANFtrainer es Arturo: +19 años levantando hierros y acompañando a personas
+        reales. Hay dos huecos abiertos para colaboradores —nutrición y fuerza/fisio—
+        que se publicarán cuando estén confirmados.
+      </p>
+    </div>
+
+    <div class="coaches-grid">
+      <article class="coach-card">
+        <div class="coach-photo">
+          <span class="photo-label">[ Retrato · Arturo ]</span>
+        </div>
+        <div class="coach-info">
+          <div class="coach-row1">
+            <div>
+              <div class="coach-name">Arturo</div>
+              <div class="coach-role">Fundador · Head coach</div>
+            </div>
+            <div class="coach-id">01 / 03</div>
+          </div>
+          <p class="coach-bio">
+            +19 años levantando hierros, apasionado del deporte y la cultura física.
+            Formado con entrenadores como Javier Lavandera y en seminarios como los de
+            Piti Pinsach (hipopresivos, suelo pélvico, salud del pie, Natural Classic).
+            Experiencia dando clases dirigidas —entrenamientos metabólicos, bodypump,
+            mantenimiento y sala— en diversos gimnasios. Filosofía 100% natural, sin
+            sustancias dopantes: atiende personalmente cada caso.
+          </p>
+          <div class="coach-specs">
+            <div class="row"><span>Especialidad</span><span>Culturismo natural</span></div>
+            <div class="row"><span>Formación</span><span>Ent. personal · Monitor</span></div>
+            <div class="row"><span>Nutrición</span><span>Futuro dietista superior</span></div>
+            <div class="row"><span>Certificación</span><span>España · Europa</span></div>
+            <div class="row"><span>Filosofía</span><span>WADA · Clean</span></div>
+            <div class="row"><span>Disponibilidad</span><span>España · Online</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="coach-card is-pending">
+        <div class="coach-photo pending">
+          <span class="photo-label">[ Colaborador · pendiente ]</span>
+        </div>
+        <div class="coach-info">
+          <div class="coach-row1">
+            <div>
+              <div class="coach-name" style="color:var(--ink-faint)">Por confirmar</div>
+              <div class="coach-role">Coach nutricional</div>
+            </div>
+            <div class="coach-id">02 / 03</div>
+          </div>
+          <p class="coach-bio pending">
+            Plaza reservada para un/a profesional colegiado/a en nutrición.
+            Se publicará nombre y credenciales reales cuando esté incorporado/a.
+          </p>
+          <div class="coach-specs">
+            <div class="row"><span>Estado</span><span style="color:var(--accent)">Pendiente</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="coach-card is-pending">
+        <div class="coach-photo pending">
+          <span class="photo-label">[ Colaborador · pendiente ]</span>
+        </div>
+        <div class="coach-info">
+          <div class="coach-row1">
+            <div>
+              <div class="coach-name" style="color:var(--ink-faint)">Por confirmar</div>
+              <div class="coach-role">Coach fuerza · Fisio</div>
+            </div>
+            <div class="coach-id">03 / 03</div>
+          </div>
+          <p class="coach-bio pending">
+            Plaza reservada para un/a fisioterapeuta o entrenador/a de fuerza colegiado/a.
+            Se publicará nombre y credenciales reales cuando esté incorporado/a.
+          </p>
+          <div class="coach-specs">
+            <div class="row"><span>Estado</span><span style="color:var(--accent)">Pendiente</span></div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== Filosofía ===== -->
+  <section class="section philosophy-section" id="filosofia">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">[ 07 ] Filosofía</div>
+        <h2 class="section-title">Sin atajos. <em>Solo</em> progresión <span class="outline">natural</span>.</h2>
+      </div>
+      <p class="section-sub">
+        En ANFtrainer rechazamos tajantemente el uso de sustancias dopantes. Si compartes
+        esta filosofía, aquí tienes tu hueco.
+      </p>
+    </div>
+
+    <div class="philosophy-wrap">
+      <aside class="philosophy-side">
+        <div class="philosophy-quote">
+          <div class="q">
+            "El deporte se vive de forma <em>natural</em>, sin ayudas exógenas prohibidas."
+          </div>
+          <div class="attrib">— ANFtrainer · Principio rector</div>
+        </div>
+
+        <div class="wada-stamp">
+          <div class="seal">W</div>
+          <div class="meta">
+            <span class="k">Nos regimos por</span>
+            <span class="v">WADA</span>
+            <span class="k" style="margin-top:2px;">World Anti-Doping Agency</span>
+          </div>
+        </div>
+      </aside>
+
+      <div class="philosophy-body">
+        <p class="emphasis">
+          En ANFtrainer <strong>rechazamos tajantemente el uso de sustancias dopantes</strong>.
+          Creemos en la práctica del culturismo —u otro tipo de deporte— de una forma natural,
+          sin el uso de ayudas exógenas prohibidas.
+        </p>
+        <p>
+          Por ello nos regimos por las sustancias admitidas por la <strong>WADA</strong>
+          (World Anti-Doping Agency), agencia mundial antidopaje, asegurándonos de practicar y
+          promover el deporte de manera totalmente saludable.
+        </p>
+        <p>
+          Si tú también tienes este tipo de filosofía y quieres mejorar de una forma
+          <strong>legal y natural</strong>, en ANFtrainer tienes tu hueco.
+        </p>
+        <p>
+          Si por el contrario pretendes conseguir un seguimiento mientras sigues usando
+          dichas sustancias, te invito a que desistas y reflexiones.
+          <strong>ANFtrainer NO ofrece servicios a personas que no sigan esta filosofía.</strong>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Contacto ===== -->
+  <section class="contact-section" id="contacto">
+    <div class="hero-glow"></div>
+    <div class="contact-eyebrow">[ 08 ] Contacto</div>
+    <h2 class="contact-title">Empieza con un <em>correo</em>.</h2>
+    <a href="mailto:ANFtrainer@gmail.com" class="contact-email ribbon-target">
+      <span class="at"></span>
+      ANFtrainer@gmail.com
+    </a>
+    <div class="contact-note">Plazas limitadas · Respuesta personal de Arturo</div>
+  </section>
+
+  <!-- ===== Scripts ===== -->
+  <script>
+    (function () {
+      // ===== Custom cursor =====
+      const dot = document.getElementById('cursorDot');
+      const orbit = document.getElementById('cursorOrbit');
+      const isFinePointer =
+        window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+      if (isFinePointer && dot && orbit) {
+        document.body.classList.add('has-custom-cursor');
+
+        let mx = -100, my = -100;
+        let dx = -100, dy = -100;
+        let isHover = false;
+        let isOrbit = false;
+
+        const hoverSel = 'a, button, .nav-link, .nav-cta, input, select, textarea, .plan-card, .coach-card, .step-card, .ba-slider';
+        const orbitSel = '.ribbon-target, .btn-primary, .nav-cta, .contact-email';
+
+        window.addEventListener('mousemove', (e) => {
+          mx = e.clientX;
+          my = e.clientY;
+          const el = document.elementFromPoint(e.clientX, e.clientY);
+          isHover = !!(el && el.closest(hoverSel));
+          isOrbit = !!(el && el.closest(orbitSel));
+        }, { passive: true });
+
+        function loop() {
+          dx += (mx - dx) * 0.22;
+          dy += (my - dy) * 0.22;
+          dot.style.transform = `translate(${dx}px, ${dy}px) translate(-50%, -50%)`;
+          dot.classList.toggle('is-hover', isHover && !isOrbit);
+          dot.classList.toggle('is-orbit', isOrbit);
+          orbit.style.transform = `translate(${dx}px, ${dy}px) translate(-50%, -50%)${isOrbit ? ' scale(1)' : ' scale(0.6)'}`;
+          orbit.classList.toggle('is-active', isOrbit);
+          requestAnimationFrame(loop);
+        }
+        requestAnimationFrame(loop);
+
+        // Hide cursor when leaving window
+        document.addEventListener('mouseleave', () => {
+          dot.style.opacity = '0';
+          orbit.style.opacity = '0';
+        });
+        document.addEventListener('mouseenter', () => {
+          dot.style.opacity = '';
+        });
+      } else {
+        // No custom cursor on touch / coarse pointer
+        document.getElementById('cursorRoot').style.display = 'none';
+      }
+
+      // ===== Smooth scroll + active nav =====
+      const links = document.querySelectorAll('.nav-link');
+      const ids = ['sobre-mi', 'empezar', 'planes', 'filosofia', 'metodo', 'transformaciones', 'equipo', 'contacto'];
+
+      links.forEach((l) => {
+        l.addEventListener('click', (e) => {
+          const href = l.getAttribute('href');
+          if (href && href.startsWith('#')) {
+            const target = document.getElementById(href.slice(1));
+            if (target) {
+              e.preventDefault();
+              window.scrollTo({
+                top: target.offsetTop - 60,
+                behavior: 'smooth',
+              });
+            }
+          }
+        });
+      });
+
+      function onScroll() {
+        const y = window.scrollY + 200;
+        let current = '';
+        ids.forEach((id) => {
+          const el = document.getElementById(id);
+          if (el && el.offsetTop <= y) current = id;
+        });
+        links.forEach((l) =>
+          l.classList.toggle('is-active', l.dataset.section === current)
+        );
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      // ===== Before / After slider drag =====
+      document.querySelectorAll('.ba-slider').forEach((slider) => {
+        let dragging = false;
+
+        function setPct(clientX) {
+          const rect = slider.getBoundingClientRect();
+          const pct = Math.max(2, Math.min(98, ((clientX - rect.left) / rect.width) * 100));
+          slider.style.setProperty('--pct', pct + '%');
+        }
+
+        function onDown(e) {
+          dragging = true;
+          const cx = e.touches ? e.touches[0].clientX : e.clientX;
+          setPct(cx);
+          if (e.cancelable) e.preventDefault();
+        }
+        function onMove(e) {
+          if (!dragging) return;
+          const cx = e.touches ? e.touches[0].clientX : e.clientX;
+          setPct(cx);
+          if (e.cancelable) e.preventDefault();
+        }
+        function onUp() { dragging = false; }
+
+        slider.addEventListener('mousedown', onDown);
+        slider.addEventListener('touchstart', onDown, { passive: false });
+        window.addEventListener('mousemove', onMove);
+        window.addEventListener('touchmove', onMove, { passive: false });
+        window.addEventListener('mouseup', onUp);
+        window.addEventListener('touchend', onUp);
+      });
+    })();
+  </script>
+</body>
+</html>
