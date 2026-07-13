@@ -1883,30 +1883,34 @@
           deporte y la cultura física siguiendo su filosofía, muchas veces peleándome contra la
           rutina y los deberes del día a día.
         </p>
-        <p>
-          He podido aprender y desarrollar una amplia experiencia en este ámbito que me ha permitido
-          acompañar a personas que buscaban mejorar, no solo una mejora física sino también mental,
-          transmitiéndoles toda la experiencia de todos estos años para que crezcan de una forma más
-          rápida, segura y sobre todo sana.
-        </p>
-        <p>
-          He podido aprender de grandes entrenadores como Javier Lavandera, yendo a seminarios de
-          distinta índole como el de Piti Pinsach para trabajo hipopresivo y suelo pélvico, salud del
-          pie, Natural Classic, etc. Dar clases dirigidas de distintas disciplinas como entrenamientos
-          metabólicos, bodypump, mantenimiento y sala en diversos gimnasios.
-        </p>
-        <p>
-          Ahora, como experto en culturismo natural, futuro dietista superior en alimentación humana,
-          monitor de actividades dirigidas y entrenador personal certificado en España y a nivel
-          europeo, me pongo a disposición a través de <strong>ANFtrainer</strong> para todas aquellas
-          personas que quieran contagiarse de la cultura y filosofía del deporte sin sustancias
-          dopantes.
-        </p>
+
+        <div class="about-more" id="about-more" hidden>
+          <p>
+            He podido aprender y desarrollar una amplia experiencia en este ámbito que me ha permitido
+            acompañar a personas que buscaban mejorar, no solo una mejora física sino también mental,
+            transmitiéndoles toda la experiencia de todos estos años para que crezcan de una forma más
+            rápida, segura y sobre todo sana.
+          </p>
+          <p>
+            He podido aprender de grandes entrenadores como Javier Lavandera, yendo a seminarios de
+            distinta índole como el de Piti Pinsach para trabajo hipopresivo y suelo pélvico, salud del
+            pie, Natural Classic, etc. Dar clases dirigidas de distintas disciplinas como entrenamientos
+            metabólicos, bodypump, mantenimiento y sala en diversos gimnasios.
+          </p>
+          <p>
+            Ahora, como experto en culturismo natural, futuro dietista superior en alimentación humana,
+            monitor de actividades dirigidas y entrenador personal certificado en España y a nivel
+            europeo, me pongo a disposición a través de <strong>ANFtrainer</strong> para todas aquellas
+            personas que quieran contagiarse de la cultura y filosofía del deporte sin sustancias
+            dopantes.
+          </p>
+        </div>
+
         <p class="lead">
           Porque aquí: <em>“Las personas normales se vuelven excepcionales”</em>
         </p>
-        <a href="https://anftrainer.com/hello-world/" class="about-link" target="_blank" rel="noopener">
-          Leer más sobre mí
+        <a href="#about-more" class="about-link" id="about-toggle" role="button" aria-expanded="false" aria-controls="about-more">
+          <span class="about-toggle-label">Leer más sobre mí</span>
           <span style="display:inline-block;width:14px;height:1px;background:currentColor;position:relative;">
             <span style="position:absolute;right:0;top:-3px;width:7px;height:7px;border-top:1px solid currentColor;border-right:1px solid currentColor;transform:rotate(45deg);"></span>
           </span>
@@ -2728,6 +2732,21 @@
         window.addEventListener('touchmove', onMove, { passive: false });
         window.addEventListener('mouseup', onUp);
         window.addEventListener('touchend', onUp);
+      });
+    })();
+
+    /* ===== "Leer más sobre mí" — desplegar / plegar ===== */
+    (function () {
+      const toggle = document.getElementById('about-toggle');
+      const more = document.getElementById('about-more');
+      if (!toggle || !more) return;
+      const label = toggle.querySelector('.about-toggle-label');
+      toggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        const isOpen = !more.hidden;
+        more.hidden = isOpen;
+        toggle.setAttribute('aria-expanded', String(!isOpen));
+        if (label) label.textContent = isOpen ? 'Leer más sobre mí' : 'Leer menos';
       });
     })();
   </script>
